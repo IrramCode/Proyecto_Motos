@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Venta de Motocicletas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="casino-body">
+  <header class="hero-italia text-light">
+    <div class="container py-5">
+      <p class="hero-eyebrow">Linea Magna · Estilo Italiano</p>
+      <h1 class="display-4 fw-bold text-uppercase">Two-Wheels Motors</h1>
+      <p class="hero-copy">
+        Tienda en linea premium de motocicletas japonesas y americanas de gran cilindrada con la intención de que obtengas tu sueño de obtener una.
+      </p>
+      <div class="d-flex flex-wrap gap-3">
+        <a href="#crud" class="btn btn-primary px-4">Gestionar colección</a>
+        <a href="#galeria-marcas" class="btn btn-outline-light px-4">Ver opciones</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-xxl py-5">
+    <section id="crud" class="glass-panel mb-5">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <div>
+          <p class="section-eyebrow">Panel de búsqueda</p>
+          <h2 class="section-title">Encuentra tu sueño</h2>
+        </div>
+        <span class="badge text-bg-light text-uppercase tracking-wide">Euro Motors</span>
+      </div>
+
+      <form id="motoForm" class="row g-3 mb-4">
+        <input type="hidden" id="motoId" />
+        <div class="col-lg-4 col-md-6">
+          <label for="marca" class="form-label">Marca</label>
+          <input type="text" id="marca" class="form-control" placeholder="Indian, Honda..." required />
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <label for="modelo" class="form-label">Modelo</label>
+          <input type="text" id="modelo" class="form-control" placeholder="Roadmaster, CMX1100..." required />
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <label for="precio" class="form-label">Precio (MXN)</label>
+          <input type="number" id="precio" class="form-control" placeholder="45000" required />
+        </div>
+        <div class="col-lg-1 col-md-6 d-grid align-self-end">
+          <button type="submit" class="btn btn-primary mt-md-0 mt-3">Guardar</button>
+        </div>
+      </form>
+
+      <div class="row" id="motoCards"></div>
+    </section>
+
+    <section id="carrito-section" class="glass-panel mb-5">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+        <div>
+          <p class="section-eyebrow">Tu selección</p>
+          <h2 class="section-title">Carrito de compras</h2>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge text-bg-light text-uppercase tracking-wide" id="carrito-badge">0 items</span>
+          <button id="btnComprar" class="btn btn-primary btn-sm px-4" type="button">Comprar</button>
+        </div>
+      </div>
+      <div class="row" id="carritoCards">
+        <p class="text-muted text-center w-100">El carrito está vacío</p>
+      </div>
+    </section>
+
+    <section id="galeria-marcas" class="mb-5">
+      <p class="section-eyebrow">Curaduría icónica</p>
+      <h2 class="section-title">Firmas legendarias</h2>
+      <div class="brand-tabs mb-4">
+        <a href="#indian" class="tab-link">Indian</a>
+        <a href="#honda" class="tab-link">Honda</a>
+        <a href="#yamaha" class="tab-link">Yamaha</a>
+        <a href="#harley" class="tab-link">Harley-Davidson</a>
+      </div>
+    </section>
+
+    <section id="indian" class="brand-section">
+      <div class="section-header">
+        <div>
+          <p class="section-eyebrow">Herencia Americana</p>
+          <h3 class="section-title">Indian Motorcycle</h3>
+        </div>
+        <span class="badge text-bg-danger">V-Twin Thunderstroke</span>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Indian_Roadmaster.jpg');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Touring emblema</p>
+              <h4>Indian Roadmaster</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Thunderstroke 116 / PowerPlus 112</strong></li>
+                <li><span>Categoría</span><strong>Touring</strong></li>
+                <li><span>Precio</span><strong>$850,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Roadmaster"
+                data-precio="850000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Indian_Challenger.jpg');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Bagger performance</p>
+              <h4>Indian Challenger</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>PowerPlus 108 / 112</strong></li>
+                <li><span>Categoría</span><strong>Bagger de alto rendimiento</strong></li>
+                <li><span>Precio</span><strong>$780,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Challenger"
+                data-precio="780000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Indian_Chieftain.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Bagger clásico</p>
+              <h4>Indian Chieftain</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Thunderstroke 116</strong></li>
+                <li><span>Categoría</span><strong>Bagger</strong></li>
+                <li><span>Precio</span><strong>$720,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Chieftain"
+                data-precio="720000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('indian_pursuit.jpg');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Touring táctico</p>
+              <h4>Indian Pursuit</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>PowerPlus 108 / 112</strong></li>
+                <li><span>Categoría</span><strong>Touring</strong></li>
+                <li><span>Precio</span><strong>$820,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Pursuit"
+                data-precio="820000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Indian_Springfield.jpg');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Touring clásico</p>
+              <h4>Indian Springfield</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Thunderstroke 116</strong></li>
+                <li><span>Categoría</span><strong>Touring/Cruiser</strong></li>
+                <li><span>Precio</span><strong>$690,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Springfield"
+                data-precio="690000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Indian_chief.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser icónica</p>
+              <h4>Indian Chief</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Thunderstroke 116</strong></li>
+                <li><span>Categoría</span><strong>Cruiser</strong></li>
+                <li><span>Precio</span><strong>$640,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Chief"
+                data-precio="640000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image: 
+          url('Indian_Super_Chief_Limited.jpg');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser Touring</p>
+              <h4>Super Chief Limited</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Thunderstroke 116</strong></li>
+                <li><span>Categoría</span><strong>Cruiser Touring</strong></li>
+                <li><span>Precio</span><strong>$760,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Super Chief Limited"
+                data-precio="760000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image: 
+          url('Indian_Roadmaster_Elite.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Ultra lujo</p>
+              <h4>Roadmaster Elite</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Thunderstroke 116 / PowerPlus 112</strong></li>
+                <li><span>Categoría</span><strong>Touring elite</strong></li>
+                <li><span>Precio</span><strong>$980,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Roadmaster Elite"
+                data-precio="980000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Indian_Challenger_Elite.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Bagger elite</p>
+              <h4>Challenger Elite</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>PowerPlus 108</strong></li>
+                <li><span>Categoría</span><strong>Bagger ultra lujo</strong></li>
+                <li><span>Precio</span><strong>$920,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Challenger Elite"
+                data-precio="920000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <article class="brand-card brand-card--with-image" style="background-image: 
+          url('Indian_chief_bobber.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Bobber heritage</p>
+              <h4>Indian Chief Bobber</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Thunderstroke 116</strong></li>
+                <li><span>Categoría</span><strong>Bobber</strong></li>
+                <li><span>Precio</span><strong>$670,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Indian"
+                data-modelo="Chief Bobber"
+                data-precio="670000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="honda" class="brand-section">
+      <div class="section-header">
+        <div>
+          <p class="section-eyebrow">Ingeniería Nipona</p>
+          <h3 class="section-title">Honda Custom Series</h3>
+        </div>
+        <span class="badge text-bg-success">Herencia V4 & Parallel Twin</span>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_fury.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Factory Chopper</p>
+              <h4>Honda Fury</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1300 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Precio</span><strong>$260,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="Fury"
+                data-precio="260000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_CMX1100.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Custom Premium</p>
+              <h4>Honda CMX1100 Rebel</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1084 cc</strong></li>
+                <li><span>Estado</span><strong>Actual</strong></li>
+                <li><span>Precio</span><strong>$235,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="CMX1100 Rebel"
+                data-precio="235000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_Shadow_1100.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser clásica</p>
+              <h4>Honda Shadow 1100</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1100 cc</strong></li>
+                <li><span>Estado</span><strong>Clásica</strong></li>
+                <li><span>Precio</span><strong>$120,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="Shadow 1100"
+                data-precio="120000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_Shadow_VT750.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser media</p>
+              <h4>Honda Shadow VT750</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>750 cc</strong></li>
+                <li><span>Estado</span><strong>Clásica</strong></li>
+                <li><span>Precio</span><strong>$110,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="Shadow VT750"
+                data-precio="110000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_CMX500_Rebel.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Bobber media</p>
+              <h4>Honda CMX500 Rebel</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>471 cc</strong></li>
+                <li><span>Estado</span><strong>Actual</strong></li>
+                <li><span>Precio</span><strong>$150,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="CMX500 Rebel"
+                data-precio="150000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_VT1300CX_Sabre.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Power Cruiser</p>
+              <h4>Honda VT1300CX / Sabre / Stateline</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1312 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Precio</span><strong>$240,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="VT1300CX / Sabre / Stateline"
+                data-precio="240000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_Shadow_VLX_600.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser ligera</p>
+              <h4>Honda Shadow VLX 600</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>600 cc</strong></li>
+                <li><span>Estado</span><strong>Clásica</strong></li>
+                <li><span>Precio</span><strong>$95,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="Shadow VLX 600"
+                data-precio="95000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_Shadow_Phantom_750.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Blacked-out</p>
+              <h4>Honda Shadow Phantom 750</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>750 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Precio</span><strong>$130,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="Shadow Phantom 750"
+                data-precio="130000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_Magna.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Muscle Bike</p>
+              <h4>Honda Magna</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>750 cc (V4)</strong></li>
+                <li><span>Estado</span><strong>Clásica</strong></li>
+                <li><span>Precio</span><strong>$115,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="Magna"
+                data-precio="115000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Honda_Shadow_Aero_750.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser clásico</p>
+              <h4>Honda Shadow Aero 750</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>750 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Precio</span><strong>$125,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Honda"
+                data-modelo="Shadow Aero 750"
+                data-precio="125000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="yamaha" class="brand-section">
+      <div class="section-header">
+        <div>
+          <p class="section-eyebrow">Espíritu Samurai</p>
+          <h3 class="section-title">Yamaha Midnight Line</h3>
+        </div>
+        <span class="badge text-bg-dark">Torque Legendario</span>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Yamaha_XV1900_Raider.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Factory Custom</p>
+              <h4>Yamaha XV1900 Raider</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1854 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Estilo</span><strong>Extreme cruiser</strong></li>
+                <li><span>Precio</span><strong>$310,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="XV1900 Raider"
+                data-precio="310000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Yamaha_VMAX.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Muscle Bike</p>
+              <h4>Yamaha VMAX</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1679 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Estilo</span><strong>Power cruiser</strong></li>
+                <li><span>Precio</span><strong>$320,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="VMAX"
+                data-precio="320000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Yamaha_Road_Star_Warrior.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Power Cruiser</p>
+              <h4>Yamaha Road Star Warrior</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1700 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Estilo</span><strong>Muscle cruiser</strong></li>
+                <li><span>Precio</span><strong>$260,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="Road Star Warrior"
+                data-precio="260000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Yamaha_Bolt_R-Spec.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Bobber actual</p>
+              <h4>Yamaha Bolt R-Spec</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>942 cc</strong></li>
+                <li><span>Estado</span><strong>Actual</strong></li>
+                <li><span>Estilo</span><strong>Bobber</strong></li>
+                <li><span>Precio</span><strong>$210,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="Bolt R-Spec"
+                data-precio="210000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Yamaha_V_Star_1300.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser custom</p>
+              <h4>Yamaha V Star 1300 / Stryker</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1304 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Estilo</span><strong>Custom grande</strong></li>
+                <li><span>Precio</span><strong>$230,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="V Star 1300 / Stryker"
+                data-precio="230000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Yamaha_V_Star_1100.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser clásica</p>
+              <h4>Yamaha V Star 1100</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1063 cc</strong></li>
+                <li><span>Estado</span><strong>Clásica</strong></li>
+                <li><span>Estilo</span><strong>DragStar</strong></li>
+                <li><span>Precio</span><strong>$140,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="V Star 1100"
+                data-precio="140000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Yamaha_XV950_Midnight_Star.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser media</p>
+              <h4>Yamaha XV950 Midnight Star</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>942 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Estilo</span><strong>Midnight cruiser</strong></li>
+                <li><span>Precio</span><strong>$190,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="XV950 Midnight Star"
+                data-precio="190000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image: 
+          url('Yamaha_V_Star_650.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser personalizable</p>
+              <h4>Yamaha V Star 650</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>649 cc</strong></li>
+                <li><span>Estado</span><strong>Clásica</strong></li>
+                <li><span>Estilo</span><strong>Custom base</strong></li>
+                <li><span>Precio</span><strong>$110,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="V Star 650"
+                data-precio="110000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image: 
+          url('Yamaha_XVS1300_Custom.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser agresiva</p>
+              <h4>Yamaha XVS1300 Custom</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1304 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Estilo</span><strong>Pro-street</strong></li>
+                <li><span>Precio</span><strong>$225,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="XVS1300 Custom"
+                data-precio="225000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Yamaha_XV1700_Road_Star.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Cruiser/Touring</p>
+              <h4>Yamaha XV1700 Road Star</h4>
+              <ul class="card-specs">
+                <li><span>Cilindrada</span><strong>1670 cc</strong></li>
+                <li><span>Estado</span><strong>Descatalogada</strong></li>
+                <li><span>Estilo</span><strong>Touring clásico</strong></li>
+                <li><span>Precio</span><strong>$210,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-light btn-sm mt-2 add-cart-btn"
+                data-marca="Yamaha"
+                data-modelo="XV1700 Road Star"
+                data-precio="210000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="harley" class="brand-section">
+      <div class="section-header">
+        <div>
+          <p class="section-eyebrow">Pura esencia Milwaukee</p>
+          <h3 class="section-title">Harley-Davidson Atelier</h3>
+        </div>
+        <span class="badge text-bg-warning text-dark">Milwaukee-Eight & Twin Cam</span>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Breakout_117.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Factory Custom</p>
+              <h4>Breakout™ 117</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Milwaukee-Eight 117 (1923 cc)</strong></li>
+                <li><span>Estilo</span><strong>Chopper estilizada</strong></li>
+                <li><span>Precio</span><strong>$580,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="Breakout 117"
+                data-precio="580000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Street\ Bob_114.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Bobber minimalista</p>
+              <h4>Street Bob™ 114</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Milwaukee-Eight 114 (1868 cc)</strong></li>
+                <li><span>Estilo</span><strong>Ape hanger</strong></li>
+                <li><span>Precio</span><strong>$420,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="Street Bob 114"
+                data-precio="420000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image: 
+          url('Low_Rider_S.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Performance club</p>
+              <h4>Low Rider™ S</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Milwaukee-Eight 117</strong></li>
+                <li><span>Estilo</span><strong>Club style</strong></li>
+                <li><span>Precio</span><strong>$470,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="Low Rider S"
+                data-precio="470000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Fat_Boy_114.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Muscle icon</p>
+              <h4>Fat Boy® 114</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Milwaukee-Eight 114 (1868 cc)</strong></li>
+                <li><span>Estilo</span><strong>Muscle Cruiser</strong></li>
+                <li><span>Precio</span><strong>$540,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="Fat Boy 114"
+                data-precio="540000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('FXDR_114.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Power drag</p>
+              <h4>FXDR™ 114</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Milwaukee-Eight 114</strong></li>
+                <li><span>Estilo</span><strong>Estética drag</strong></li>
+                <li><span>Precio</span><strong>$510,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="FXDR 114"
+                data-precio="510000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Softail_Standard.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Lienzo custom</p>
+              <h4>Softail® Standard</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Milwaukee-Eight 107 (1746 cc)</strong></li>
+                <li><span>Estilo</span><strong>Chopper base</strong></li>
+                <li><span>Precio</span><strong>$390,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="Softail Standard"
+                data-precio="390000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image: 
+          url('Softail_Slim.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Bobber vintage</p>
+              <h4>Softail Slim</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Milwaukee-Eight 107</strong></li>
+                <li><span>Estilo</span><strong>Militar vintage</strong></li>
+                <li><span>Precio</span><strong>$430,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="Softail Slim"
+                data-precio="430000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image: 
+        url('CVO_Breakout.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">CVO exclusivo</p>
+              <h4>CVO™ Breakout</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Milwaukee-Eight 117</strong></li>
+                <li><span>Estilo</span><strong>Edición limitada</strong></li>
+                <li><span>Precio</span><strong>$720,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="CVO Breakout"
+                data-precio="720000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Dyna_Wide_Glide.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Chopper clásica</p>
+              <h4>Dyna Wide Glide</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Twin Cam</strong></li>
+                <li><span>Estilo</span><strong>Tradicional</strong></li>
+                <li><span>Precio</span><strong>$210,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="Dyna Wide Glide"
+                data-precio="210000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <article class="brand-card brand-card--with-image" style="background-image:
+          url('Dyna_Street_Bob.webp');">
+            <div class="brand-card__content">
+              <p class="section-eyebrow mb-1">Bobber esencial</p>
+              <h4>Dyna Street Bob</h4>
+              <ul class="card-specs">
+                <li><span>Motor</span><strong>Twin Cam</strong></li>
+                <li><span>Estilo</span><strong>Base de taller</strong></li>
+                <li><span>Precio</span><strong>$200,000 MXN</strong></li>
+              </ul>
+              <button class="btn btn-dark btn-sm mt-2 add-cart-btn"
+                data-marca="Harley-Davidson"
+                data-modelo="Dyna Street Bob"
+                data-precio="200000">
+                Agregar al carrito
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="casino-footer text-center py-4">
+    <p class="mb-0">© 2025 Euro Motors · Curaduría de alto octanaje con alma italiana.</p>
+  </footer>
+  <script>
+        async function cargarMotos() {
+            try {
+                const respuesta = await fetch('http://localhost:5127/api/motos');
+                const motos = await respuesta.json();
+                
+                console.log("¡Motos recibidas!", motos);
+                
+                motos.forEach(moto => {
+                    // Esto imprimirá las motos en la consola del navegador (F12)
+                    console.log(`Marca: ${moto.marca}, Modelo: ${moto.modelo}`);
+                });
+            } catch (error) {
+                console.error("Error al conectar con la API:", error);
+            }
+        }
+
+        cargarMotos();
+    </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
