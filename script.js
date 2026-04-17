@@ -221,7 +221,7 @@ async function comprarCarrito() {
 
     // Aquí podrías crear otra API en Render para Compras si lo deseas, 
     // por ahora simulamos el éxito localmente:
-    alert("¡Compra exitosa! Gracias por preferir MotoBoutique.");
+    alert("¡Compra exitosa! Gracias por preferir TWO-WHEELS MOTORS.");
     guardarCarrito([]);
     cargarCarrito();
 }
