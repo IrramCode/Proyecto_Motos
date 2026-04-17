@@ -1,3 +1,6 @@
+// CONFIGURACIÓN: Tu nueva URL de Render (Sin el slash final)
+const API_URL = "https://proyecto-motosapi.onrender.com/api/motos";
+
 // Cargar motos al iniciar la página
 document.addEventListener("DOMContentLoaded", () => {
     cargarMotos();
@@ -19,10 +22,10 @@ function guardarCarrito(carrito) {
     localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
-// 1. LISTAR: Obtener todas las motos desde la API .NET
+// 1. LISTAR: Obtener todas las motos desde la API en Render
 async function cargarMotos() {
     try {
-        const res = await fetch("http://localhost:5127/api/motos");
+        const res = await fetch(API_URL);
         const motos = await res.json();
         renderTabla(motos);
     } catch (error) {
@@ -42,29 +45,33 @@ document.getElementById("motoForm").addEventListener("submit", async function (e
     const motoData = { 
         marca: marca, 
         modelo: modelo, 
-        precio: precio.toString() 
+        precio: parseFloat(precio) // Aseguramos que sea número
     };
 
     try {
-        if (motoId === "") {
-            // POST: Nueva moto
-            await fetch("http://localhost:5127/api/motos", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(motoData)
-            });
-        } else {
-            // PUT: Editar existente
-            await fetch(`http://localhost:5127/api/motos/${motoId}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(motoData)
-            });
+        let url = API_URL;
+        let method = "POST";
+
+        if (motoId !== "") {
+            // Si hay ID, es una actualización (PUT)
+            url = `${API_URL}/${motoId}`;
+            method = "PUT";
+            // Incluimos el ID en el cuerpo si tu API lo requiere
+            motoData.id = parseInt(motoId);
         }
-        
-        this.reset();
-        document.getElementById("motoId").value = "";
-        cargarMotos(); // Recargar la lista
+
+        const res = await fetch(url, {
+            method: method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(motoData)
+        });
+
+        if (res.ok) {
+            this.reset();
+            document.getElementById("motoId").value = "";
+            cargarMotos(); // Recargar la lista
+            alert("Operación exitosa");
+        }
     } catch (error) {
         console.error("Error guardando moto:", error);
     }
@@ -73,6 +80,7 @@ document.getElementById("motoForm").addEventListener("submit", async function (e
 // 3. RENDERIZAR: Dibujar las tarjetas en el HTML
 function renderTabla(motos) {
     const container = document.getElementById("motoCards");
+    if (!container) return;
     container.innerHTML = "";
     
     const formatoMXN = new Intl.NumberFormat("es-MX", {
@@ -106,15 +114,15 @@ function renderTabla(motos) {
     });
 }
 
-// 4. ELIMINAR: Borrar de la API
+// 4. ELIMINAR: Borrar de la API en Render
 async function eliminarMoto(id) {
     if (!confirm("¿Seguro que quieres eliminar esta moto?")) return;
 
     try {
-        await fetch(`http://localhost:5127/api/motos/${id}`, {
+        const res = await fetch(`${API_URL}/${id}`, {
             method: "DELETE"
         });
-        cargarMotos();
+        if(res.ok) cargarMotos();
     } catch (error) {
         console.error("Error al eliminar:", error);
     }
@@ -123,7 +131,7 @@ async function eliminarMoto(id) {
 // 5. EDITAR: Cargar datos en el formulario
 async function editarMoto(id) {
     try {
-        const res = await fetch(`http://localhost:5127/api/motos/${id}`);
+        const res = await fetch(`${API_URL}/${id}`);
         const moto = await res.json();
 
         document.getElementById("marca").value = moto.marca;
@@ -167,7 +175,8 @@ function cargarCarrito() {
     if(!container) return;
 
     container.innerHTML = "";
-    badge.textContent = `${items.length} ${items.length === 1 ? 'item' : 'items'}`;
+    if(badge) badge.textContent = `${items.length} ${items.length === 1 ? 'item' : 'items'}`;
+    
     if (btnComprar) {
         btnComprar.disabled = items.length === 0;
     }
@@ -205,31 +214,16 @@ function eliminarDelCarrito(id) {
     cargarCarrito();
 }
 
+// NOTA: Como no tenemos una API de "Compras" en Render, esta función solo limpia el carrito local
 async function comprarCarrito() {
     const items = obtenerCarrito();
-    if (items.length === 0) {
-        alert("El carrito está vacío.");
-        return;
-    }
+    if (items.length === 0) return;
 
-    try {
-        const res = await fetch("http://localhost:3000/compras", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items })
-        });
-
-        if (!res.ok) {
-            throw new Error("No se pudo registrar la compra.");
-        }
-
-        guardarCarrito([]);
-        cargarCarrito();
-        alert("compra exitosa");
-    } catch (error) {
-        console.error("Error al comprar:", error);
-        alert("No se pudo completar la compra.");
-    }
+    // Aquí podrías crear otra API en Render para Compras si lo deseas, 
+    // por ahora simulamos el éxito localmente:
+    alert("¡Compra exitosa! Gracias por preferir MotoBoutique.");
+    guardarCarrito([]);
+    cargarCarrito();
 }
 
 function activarTarjetasMarcas() {
