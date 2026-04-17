@@ -3,9 +3,14 @@ using MotosApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Configurar PostgreSQL
+// --- 1. CONFIGURACIÓN DE POSTGRESQL (PLAN MAESTRO) ---
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString, npgsqlOptions => {
+        // Esto le dice a tu API: "Si la BD tarda en responder, no mueras, inténtalo de nuevo 5 veces"
+        npgsqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+    }));
 
 // 2. Configurar CORS (Permite que GitHub Pages lea tu API)
 builder.Services.AddCors(options => {
